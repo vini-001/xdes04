@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Turmas Virtuais</title>
+    <title>Cadastro de Aviso</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,8 +21,19 @@
         </ul>
     </nav>
     <main>
-        <h2>Bem-vindo ao Sistema de Gestão de Turmas Virtuais</h2>
-        <p>Use o menu lateral para navegar entre as seções.</p>
+        <h2>Cadastro de Aviso</h2>
+        <form id="form-aviso" onsubmit="addAviso(event)">
+            <input type="text" id="titulo-aviso" placeholder="Título do Aviso" required>
+            <input type="text" id="descricao-aviso" placeholder="Descrição do Aviso" required>
+            <input type="date" id="data-aviso" required>
+            <input type="text" id="autor-aviso" placeholder="Autor do Aviso" required>
+            <select id="turma-aviso" required>
+                <!-- Turmas cadastradas serão listadas aqui -->
+            </select>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <div id="novo-aviso"></div>
     </main>
+    <script src="scripts.js"></script>
 </body>
 </html>
