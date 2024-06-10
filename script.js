@@ -114,53 +114,60 @@ function editTurma(element) {
 
 function atualizarListaTurmas() {
     const listaTurmas = document.getElementById('lista-turmas');
-    listaTurmas.innerHTML = '';
-    turmas.forEach((turma, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            ${turma.nome}
-            <span>
-                <button class="edit" data-index="${index}" onclick="editTurma(this)">Editar</button>
-                <button class="remove" data-index="${index}" onclick="removeTurma(this)">Remover</button>
-            </span>
-        `;
-        listaTurmas.appendChild(li);
-    });
+    if (listaTurmas) {
+        listaTurmas.innerHTML = '';
+        turmas.forEach((turma, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                ${turma.nome}
+                <span>
+                    <button class="edit" data-index="${index}" onclick="editTurma(this)">Editar</button>
+                    <button class="remove" data-index="${index}" onclick="removeTurma(this)">Remover</button>
+                </span>
+            `;
+            listaTurmas.appendChild(li);
+        });
+    }
 }
 
 function atualizarListaAlunos() {
     const selectAlunos = document.getElementById('alunos-participantes');
-    selectAlunos.innerHTML = '';
-    alunos.forEach(aluno => {
-        const option = document.createElement('option');
-        option.value = aluno.cpf;
-        option.text = aluno.nome;
-        selectAlunos.appendChild(option);
-    });
+    if (selectAlunos) {
+        selectAlunos.innerHTML = '';
+        alunos.forEach(aluno => {
+            const option = document.createElement('option');
+            option.value = aluno.cpf;
+            option.text = aluno.nome;
+            selectAlunos.appendChild(option);
+        });
+    }
 }
 
 function atualizarListaProfessores() {
     const selectProfessores = document.getElementById('professor-responsavel');
-    selectProfessores.innerHTML = '';
-    professores.forEach(professor => {
-        const option = document.createElement('option');
-        option.value = professor.cpf;
-        option.text = professor.nome;
-        selectProfessores.appendChild(option);
-    });
+    if (selectProfessores) {
+        selectProfessores.innerHTML = '';
+        professores.forEach(professor => {
+            const option = document.createElement('option');
+            option.value = professor.cpf;
+            option.text = professor.nome;
+            selectProfessores.appendChild(option);
+        });
+    }
 }
 
 function atualizarListaAvisos() {
     const selectTurmas = document.getElementById('turma-aviso');
-    selectTurmas.innerHTML = '';
-    turmas.forEach(turma => {
-        const option = document.createElement('option');
-        option.value = turma.codigo;
-        option.text = turma.nome;
-        selectTurmas.appendChild(option);
-    });
+    if (selectTurmas) {
+        selectTurmas.innerHTML = '';
+        turmas.forEach(turma => {
+            const option = document.createElement('option');
+            option.value = turma.codigo;
+            option.text = turma.nome;
+            selectTurmas.appendChild(option);
+        });
+    }
 }
-
 function emitirRelatorioTurmas() {
     const relatorioTurmas = document.getElementById('relatorio-turmas');
     relatorioTurmas.innerHTML = `
@@ -214,3 +221,10 @@ function emitirRelatorioAlunos() {
         </table>
     `;
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    atualizarListaTurmas();
+    atualizarListaAlunos();
+    atualizarListaProfessores();
+    atualizarListaAvisos();
+});
