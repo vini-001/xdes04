@@ -1,0 +1,40 @@
+<!-- lancar_frequencia.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lançar Frequência</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Lançar Frequência</h1>
+    </header>
+    <main>
+        <form onsubmit="lancarFrequencia(event)">
+            <label for="aluno">Nome do Aluno:</label>
+            <select id="aluno" name="aluno" required>
+                <!-- Os alunos serão carregados pelo JavaScript -->
+            </select>
+
+            <label for="disciplina">Disciplina:</label>
+            <input type="text" id="disciplina" name="disciplina" required>
+
+            <label for="presenca">Presença:</label>
+            <select id="presenca" name="presenca" required>
+                <option value="presente">Presente</option>
+                <option value="ausente">Ausente</option>
+            </select>
+
+            <input type="submit" value="Lançar Frequência">
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Sistema de Gestão de Turmas Virtuais</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
