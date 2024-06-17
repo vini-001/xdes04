@@ -4,18 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const saveData = (key, data) => {
         localStorage.setItem(key, JSON.stringify(data));
-        console.log(`Dados salvos para ${key}:`, data); // Mensagem de depuração
+        console.log(`Dados salvos para ${key}:`, data);
     };
 
     const loadData = (key) => {
         const data = JSON.parse(localStorage.getItem(key)) || [];
-        console.log(`Dados carregados para ${key}:`, data); // Mensagem de depuração
+        console.log(`Dados carregados para ${key}:`, data);
         return data;
     };
 
     const createSelectOptions = (items, valueKey, textKey) => {
         if (items.length === 0) {
-            console.log(`Nenhum item encontrado para ${valueKey} e ${textKey}.`); // Mensagem de depuração
+            console.log(`Nenhum item encontrado para ${valueKey} e ${textKey}.`);
             return '<option value="">Nenhum dado disponível</option>';
         }
 
@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item[valueKey] && item[textKey]) {
                 return `<option value="${item[valueKey]}">${item[textKey]}</option>`;
             } else {
-                console.error(`Erro nos dados do item:`, item); // Mensagem de depuração
+                console.error(`Erro nos dados do item:`, item);
                 return '<option value="">Dados inválidos</option>';
             }
         }).join('');
         
-        console.log(`Opções criadas:`, options); // Mensagem de depuração
+        console.log(`Opções criadas:`, options);
         return options;
     };
 
@@ -98,12 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const alunos = loadData('alunos');
                 const professores = loadData('professores');
 
-                console.log("Professores carregados:", professores); // Mensagem de depuração
+                console.log("Professores carregados:", professores);
 
                 const alunoOptions = createSelectOptions(alunos, 'cpf', 'nome');
                 const professorOptions = createSelectOptions(professores, 'cpf', 'nome');
 
-                console.log("Opções de professores:", professorOptions); // Mensagem de depuração
+                console.log("Opções de professores:", professorOptions);
 
                 formCampos.innerHTML = `
                     <label for="codigo">Código:</label>
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let professores = loadData('professores'); // Carregar dados existentes
                     professores.push(data); // Adicionar novo professor
                     saveData('professores', professores); // Salvar dados atualizados
-                    console.log("Professor cadastrado:", data); // Mensagem de depuração
+                    console.log("Professor cadastrado:", data);
                     break;
                 case 'turma':
                     data = {
@@ -258,6 +258,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         professor: document.getElementById('professor').value,
                         status: document.getElementById('status').value
                     };
+                    let turmas = loadData('turmas'); // Carregar dados existentes
+                    turmas.push(data); // Adicionar nova turma
+                    saveData('turmas', turmas); // Salvar dados atualizados
+                    console.log("Turma cadastrada:", data);
                     break;
                 case 'atividade':
                     data = {
@@ -326,8 +330,16 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'notas':
                 emitirCampos.innerHTML = `
                     <label for="turmaNotas">Código da Turma:</label>
-                    <input type="text" id="turmaNotas" name="turmaNotas" required>
+                    <select id="turmaNotas" name="turmaNotas" required>
+                        ${createSelectOptions(loadData('turmas'), 'codigo', 'nomeTurma')}
+                    </select>
+                    <button type="button" id="emitirNotas">Emitir Notas</button>
+                    <div id="resultadoNotas"></div>
                 `;
+                document.getElementById('emitirNotas').addEventListener('click', () => {
+                    const codigoTurma = document.getElementById('turmaNotas').value;
+                    emitirNotas(codigoTurma);
+                });
                 break;
             case 'relatorio':
                 emitirCampos.innerHTML = `
@@ -343,4 +355,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 emitirCampos.innerHTML = '';
         }
     });
+
+    const emitirNotas = (codigoTurma) => {
+        const notas = loadData('notas');
+        const alunos = loadData('alunos');
+        const notasTurma = notas.filter(nota => nota.turma === codigoTurma);
+
+        let resultadoHTML = '<h3>Notas da Turma</h3>';
+        notasTurma.forEach(nota => {
+            const aluno = alunos.find(aluno => aluno.cpf === nota.aluno);
+            if (aluno) {
+                resultadoHTML += `<p>${aluno.nome} (${aluno.cpf}): ${nota.nota}</p>`;
+            }
+        });
+
+        document.getElementById('resultadoNotas').innerHTML = resultadoHTML;
+    };
 });
