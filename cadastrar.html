@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar - SGTV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Cadastrar - SGTV</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="cadastrar.html">Cadastrar</a></li>
+                <li><a href="consultar.html">Consultar</a></li>
+                <li><a href="editar.html">Editar</a></li>
+                <li><a href="remover.html">Remover</a></li>
+                <li><a href="emitir.html">Emitir</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Cadastrar Entidades</h2>
+        <form id="cadastroForm">
+            <label for="entidade">Escolha a entidade:</label>
+            <select id="entidade" name="entidade">
+                <option value="aluno">Aluno</option>
+                <option value="professor">Professor</option>
+                <option value="turma">Turma</option>
+                <option value="atividade">Atividade</option>
+                <option value="usuario">Usuário</option>
+                <option value="aviso">Aviso</option>
+                <option value="nota">Notas</option>
+            </select>
+            <div id="formCampos"></div>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 SGTV. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar - SGTV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Consultar - SGTV</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="cadastrar.html">Cadastrar</a></li>
+                <li><a href="consultar.html">Consultar</a></li>
+                <li><a href="editar.html">Editar</a></li>
+                <li><a href="remover.html">Remover</a></li>
+                <li><a href="emitir.html">Emitir</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Consultar Registros</h2>
+        <form id="consultaForm">
+            <label for="entidadeConsulta">Escolha a entidade:</label>
+            <select id="entidadeConsulta" name="entidade">
+                <option value="aluno">Aluno</option>
+                <option value="professor">Professor</option>
+                <option value="turma">Turma</option>
+                <option value="atividade">Atividade</option>
+                <option value="usuario">Usuário</option>
+                <option value="nota">Notas</option>
+            </select>
+            <button type="submit">Consultar</button>
+        </form>
+        <div id="consultaResultados"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 SGTV. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const consultaForm = document.getElementById('consultaForm');
+            const consultaResultados = document.getElementById('consultaResultados');
+
+            consultaForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const entidadeConsulta = document.getElementById('entidadeConsulta').value;
+                let key = `${entidadeConsulta}s`;
+                let dataList = JSON.parse(localStorage.getItem(key)) || [];
+                
+                let resultHTML = '<table><tr>';
+                for (let key in dataList[0]) {
+                    resultHTML += `<th>${key}</th>`;
+                }
+                resultHTML += '</tr>';
+                
+                dataList.forEach(data => {
+                    resultHTML += '<tr>';
+                    for (let key in data) {
+                        resultHTML += `<td>${data[key]}</td>`;
+                    }
+                    resultHTML += '</tr>';
+                });
+                resultHTML += '</table>';
+
+                consultaResultados.innerHTML = resultHTML;
+            });
+        });
+    </script>
+</body>
+</html>

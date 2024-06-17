@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remover - SGTV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Remover - SGTV</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="cadastrar.html">Cadastrar</a></li>
+                <li><a href="consultar.html">Consultar</a></li>
+                <li><a href="editar.html">Editar</a></li>
+                <li><a href="remover.html">Remover</a></li>
+                <li><a href="emitir.html">Emitir</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Remover Registros</h2>
+        <form id="removerForm">
+            <label for="entidadeRemover">Escolha a entidade:</label>
+            <select id="entidadeRemover" name="entidade">
+                <option value="aluno">Aluno</option>
+                <option value="professor">Professor</option>
+                <option value="turma">Turma</option>
+                <option value="atividade">Atividade</option>
+                <option value="usuario">Usuário</option>
+            </select>
+            <label for="identificador">Identificador (CPF ou Código):</label>
+            <input type="text" id="identificador" name="identificador" required>
+            <button type="submit">Remover</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 SGTV. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const removerForm = document.getElementById('removerForm');
+
+            removerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const entidadeRemover = document.getElementById('entidadeRemover').value;
+                const identificador = document.getElementById('identificador').value;
+                let key = `${entidadeRemover}s`;
+                let dataList = JSON.parse(localStorage.getItem(key)) || [];
+
+                const index = dataList.findIndex(item => item.cpf == identificador || item.codigo == identificador);
+                if (index !== -1) {
+                    dataList.splice(index, 1);
+                    localStorage.setItem(key, JSON.stringify(dataList));
+                    alert(`${entidadeRemover.charAt(0).toUpperCase() + entidadeRemover.slice(1)} removido com sucesso!`);
+                } else {
+                    alert(`${entidadeRemover.charAt(0).toUpperCase() + entidadeRemover.slice(1)} não encontrado!`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
