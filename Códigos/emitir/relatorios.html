@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emitir Relatórios - SGTV</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Emitir Relatórios - SGTV</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="notas.html">Emitir Notas</a></li>
+                <li><a href="relatorios.html">Emitir Relatórios</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Emitir Relatórios</h2>
+        <form id="emitirRelatoriosForm">
+            <label for="codigoTurma">Código da Turma:</label>
+            <input type="text" id="codigoTurma" name="codigoTurma" required>
+            <label for="atividade">Atividade:</label>
+            <input type="text" id="atividade" name="atividade" required>
+            <label for="professorRelatorio">Professor:</label>
+            <input type="text" id="professorRelatorio" name="professorRelatorio" required>
+            <button type="submit">Emitir Relatório</button>
+        </form>
+        <div id="resultadosEmissaoRelatorios"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 SGTV. Todos os direitos reservados.</p>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

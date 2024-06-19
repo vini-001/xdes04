@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisos - SGTV</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Avisos - SGTV</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="cadastrar.html">Cadastrar</a></li>
+                <li><a href="editar.html">Editar</a></li>
+                <li><a href="remover.html">Remover</a></li>
+                <li><a href="avisos.html">Avisos</a></li>
+                <li><a href="notas.html">Notas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Avisos</h2>
+        <form id="avisosForm">
+            <label for="titulo">Título do Aviso:</label>
+            <input type="text" id="titulo" name="titulo" required>
+            <label for="descricao">Descrição do Aviso:</label>
+            <textarea id="descricao" name="descricao" required></textarea>
+            <label for="prioridade">Prioridade:</label>
+            <select id="prioridade" name="prioridade" required>
+                <option value="alta">Alta</option>
+                <option value="media">Média</option>
+                <option value="baixa">Baixa</option>
+            </select>
+            <label for="notificacoes">Notificações:</label>
+            <select id="notificacoes" name="notificacoes" required>
+                <option value="imediata">Enviar notificação imediata</option>
+                <option value="nao_imediata">Não enviar notificação imediata</option>
+            </select>
+            <label for="anexos">Anexos:</label>
+            <input type="file" id="anexos" name="anexos">
+            <button type="submit">Cadastrar Aviso</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 SGTV. Todos os direitos reservados.</p>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

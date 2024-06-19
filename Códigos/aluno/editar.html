@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Aluno - SGTV</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Editar Aluno - SGTV</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="cadastrar.html">Cadastrar</a></li>
+                <li><a href="editar.html">Editar</a></li>
+                <li><a href="remover.html">Remover</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Editar Aluno</h2>
+        <form id="editarAlunoForm" class="edit-form" data-entidade="aluno">
+            <label for="identificador">CPF:</label>
+            <input type="text" id="identificador" name="identificador" class="identificador" required>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="contato">Contato:</label>
+            <input type="text" id="contato" name="contato" required>
+            <label for="curso">Curso:</label>
+            <input type="text" id="curso" name="curso" required>
+            <button type="submit">Editar</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 SGTV. Todos os direitos reservados.</p>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

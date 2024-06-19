@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Turma - SGTV</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>Editar Turma - SGTV</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="cadastrar.html">Cadastrar</a></li>
+                <li><a href="editar.html">Editar</a></li>
+                <li><a href="remover.html">Remover</a></li>
+                <li><a href="avisos.html">Avisos</a></li>
+                <li><a href="notas.html">Notas</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Editar Turma</h2>
+        <form id="editarTurmaForm" class="edit-form" data-entidade="turma">
+            <label for="identificador">Código da Turma:</label>
+            <input type="text" id="identificador" name="identificador" class="identificador" required>
+            <label for="nome">Nome da Turma:</label>
+            <input type="text" id="nome" name="nome" required>
+            <label for="alunos">Alunos Participantes:</label>
+            <input type="text" id="alunos" name="alunos" required>
+            <label for="horario">Horário das Aulas:</label>
+            <input type="text" id="horario" name="horario" required>
+            <label for="local">Local das Aulas:</label>
+            <input type="text" id="local" name="local" required>
+            <label for="professor">Professor Responsável:</label>
+            <input type="text" id="professor" name="professor" required>
+            <label for="status">Status da Turma:</label>
+            <select id="status" name="status" required>
+                <option value="ativo">Ativo</option>
+                <option value="inativo">Inativo</option>
+            </select>
+            <button type="submit">Editar</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 SGTV. Todos os direitos reservados.</p>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
