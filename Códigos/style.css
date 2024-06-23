@@ -1,0 +1,122 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #2460a0;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    background-color: #2460a0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #1b4a80;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+form {
+    background: #fff;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 1em;
+}
+
+form div label {
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+form div input,
+form div select,
+form div textarea {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form div input[type="submit"] {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+form div input[type="submit"]:hover {
+    background: #0056b3;
+}
+
+ul.submenu {
+    list-style: none;
+    padding: 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+ul.submenu li {
+    margin: 0;
+}
+
+ul.submenu li a {
+    color: #2460a0;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+ul.submenu li a:hover {
+    background-color: #f1f1f1;
+}
+
+ul.submenu li:last-child a {
+    border-bottom: none;
+}

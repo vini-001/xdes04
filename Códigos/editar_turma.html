@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGTV - Editar Turma</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo SGTV">
+        <h1>Editar Turma</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aluno.html">Aluno</a></li>
+            <li><a href="turma.html">Turma</a></li>
+            <li><a href="professor.html">Professor</a></li>
+            <li><a href="relatorios.html">Relatórios</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Editar Turma</h2>
+        <form id="editarTurmaForm">
+            <div>
+                <label for="codigo">Código da Turma:</label>
+                <input type="text" id="codigo" name="codigo" required>
+            </div>
+            <div>
+                <label for="nome">Nome da Turma:</label>
+                <input type="text" id="nome" name="nome">
+            </div>
+            <div>
+                <label for="curso">Curso:</label>
+                <input type="text" id="curso" name="curso">
+            </div>
+            <div>
+                <label for="local">Local:</label>
+                <input type="text" id="local" name="local">
+            </div>
+            <div>
+                <label for="periodo">Período:</label>
+                <input type="text" id="periodo" name="periodo">
+            </div>
+            <div>
+                <label for="status">Status:</label>
+                <select id="status" name="status">
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+                </select>
+            </div>
+            <div>
+                <label for="professor">Professor:</label>
+                <select id="professor" name="professor">
+                    <option value="">Selecione o professor</option>
+                    <!-- As opções serão carregadas dinamicamente pelo JavaScript -->
+                </select>
+            </div>
+            <div>
+                <label for="alunos">Alunos:</label>
+                <select id="alunos" name="alunos" multiple>
+                    <!-- As opções serão carregadas dinamicamente pelo JavaScript -->
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Editar">
+            </div>
+        </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

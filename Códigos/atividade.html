@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGTV - Atividades</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo SGTV">
+        <h1>Atividades</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aluno.html">Aluno</a></li>
+            <li><a href="turma.html">Turma</a></li>
+            <li><a href="professor.html">Professor</a></li>
+            <li><a href="relatorios.html">Relatórios</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Cadastrar Atividade</h2>
+        <form id="cadastrarAtividadeForm">
+            <div>
+                <label for="codigo">Código da Turma:</label>
+                <input type="text" id="codigo" name="codigo" required>
+            </div>
+            <div>
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+            </div>
+            <div>
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Cadastrar Atividade">
+            </div>
+        </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

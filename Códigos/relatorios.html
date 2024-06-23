@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGTV - Relatórios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo SGTV">
+        <h1>Relatórios</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aluno.html">Aluno</a></li>
+            <li><a href="turma.html">Turma</a></li>
+            <li><a href="professor.html">Professor</a></li>
+            <li><a href="relatorios.html">Relatórios</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Gerar Relatórios</h2>
+        <form id="relatorioForm">
+            <div>
+                <label for="tipoRelatorio">Tipo de Relatório:</label>
+                <select id="tipoRelatorio" name="tipoRelatorio" required>
+                    <option value="">Selecione</option>
+                    <option value="alunos">Relatório de Alunos</option>
+                    <option value="professores">Relatório de Professores</option>
+                    <option value="turmas">Relatório de Turmas</option>
+                    <option value="notas">Relatório de Notas</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Gerar Relatório">
+            </div>
+        </form>
+        <div id="relatorioList">
+            <!-- Lista de Relatórios -->
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
