@@ -227,6 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             console.log('Notas lançadas:', turma);
             showMessage('Notas lançadas com sucesso!');
+            event.target.reset();
+
         } else {
             showMessage('Turma não encontrada!');
         }

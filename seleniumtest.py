@@ -3,126 +3,192 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
+import unittest
 import time
 
-# Configuração do webdriver
-driver = webdriver.Safari()
+class SGTVTest(unittest.TestCase):
 
-# Função para lidar com alertas
-def handle_alert():
-    try:
-        WebDriverWait(driver, 3).until(EC.alert_is_present())
-        alert = driver.switch_to.alert
+    @classmethod
+    def setUpClass(cls):
+        # Configura o ChromeDriver
+        cls.driver = webdriver.Chrome()
+        cls.driver.get("http://127.0.0.1:5500/Códigos/index.html")  # Certifique-se de que este URL está correto
+
+    def test_cadastrar_alunos(self):
+        driver = self.driver
+        for i in range(1, 21):
+            driver.find_element(By.LINK_TEXT, "Aluno").click()
+            driver.find_element(By.LINK_TEXT, "Cadastrar Aluno").click()
+
+            driver.find_element(By.ID, "cpf").send_keys(f"1234567890{i:02d}")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "nome").send_keys(f"Teste Aluno {i}")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "endereco").send_keys("Rua Exemplo, 123")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "email").send_keys(f"teste{i}@exemplo.com")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "contato").send_keys("999999999")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "curso").send_keys("Curso Teste")
+            time.sleep(0.01)
+            driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
+
+            alert = WebDriverWait(driver, 10).until(EC.alert_is_present())
+            self.assertEqual("Aluno cadastrado com sucesso!", alert.text)
+            alert.accept()
+            driver.get("http://127.0.0.1:5500/Códigos/index.html")
+
+    def test_cadastrar_professores(self):
+        driver = self.driver
+        for i in range(1, 3):
+            driver.find_element(By.LINK_TEXT, "Professor").click()
+            driver.find_element(By.LINK_TEXT, "Cadastrar Professor").click()
+
+            driver.find_element(By.ID, "cpf").send_keys(f"9876543210{i}")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "nome").send_keys(f"Teste Professor {i}")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "carteira").send_keys(f"CTPS{i}")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "endereco").send_keys("Avenida Exemplo, 456")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "email").send_keys(f"professor{i}@exemplo.com")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "contato").send_keys("888888888")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "titulos").send_keys("Doutor")
+            time.sleep(0.01)
+            driver.find_element(By.ID, "especializacao").send_keys("Matemática")
+            time.sleep(0.01)
+            driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
+
+            alert = WebDriverWait(driver, 10).until(EC.alert_is_present())
+            self.assertEqual("Professor cadastrado com sucesso!", alert.text)
+            alert.accept()
+            driver.get("http://127.0.0.1:5500/Códigos/index.html")
+
+    def test_cadastrar_turmas(self):
+        driver = self.driver
+
+        # Cadastrar Turma 1 com alunos 1 a 10
+        driver.find_element(By.LINK_TEXT, "Turma").click()
+        driver.find_element(By.LINK_TEXT, "Cadastrar Turma").click()
+        driver.find_element(By.ID, "codigo").send_keys("TURMA1")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "nome").send_keys("Turma 1")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "curso").send_keys("Curso Teste")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "local").send_keys("Sala 101")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "periodo").send_keys("Manhã")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "status").send_keys("Ativa")
+        time.sleep(0.01)
+        alunos_select = driver.find_element(By.ID, "alunos")
+        for j in range(1, 11):
+            alunos_select.find_element(By.XPATH, f"//option[@value='1234567890{j:02d}']").click()
+        time.sleep(0.01)
+        professor_select = driver.find_element(By.ID, "professor")
+        professor_select.find_element(By.XPATH, f"//option[@value='98765432101']").click()
+        time.sleep(0.01)
+        driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
+        alert = WebDriverWait(driver, 10).until(EC.alert_is_present())
+        self.assertEqual("Turma cadastrada com sucesso!", alert.text)
         alert.accept()
-    except:
-        pass
 
-# Função para adicionar um aluno
-def add_aluno(nome, cpf, endereco, email, contato, curso):
-    driver.get('http://127.0.0.1:5500/cadastrar.html')
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'entidade')))
-    select_entidade = Select(driver.find_element(By.ID, 'entidade'))
-    select_entidade.select_by_visible_text('Aluno')
-    time.sleep(0.5)  # Esperar a mudança dos campos
+        # Cadastrar Turma 2 com alunos 11 a 20
+        driver.find_element(By.LINK_TEXT, "Turma").click()
+        driver.find_element(By.LINK_TEXT, "Cadastrar Turma").click()
+        driver.find_element(By.ID, "codigo").send_keys("TURMA2")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "nome").send_keys("Turma 2")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "curso").send_keys("Curso Teste")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "local").send_keys("Sala 102")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "periodo").send_keys("Tarde")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "status").send_keys("Ativa")
+        time.sleep(0.01)
+        alunos_select = driver.find_element(By.ID, "alunos")
+        for j in range(11, 21):
+            alunos_select.find_element(By.XPATH, f"//option[@value='1234567890{j:02d}']").click()
+        time.sleep(0.01)
+        professor_select = driver.find_element(By.ID, "professor")
+        professor_select.find_element(By.XPATH, f"//option[@value='98765432102']").click()
+        time.sleep(0.01)
+        driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
+        alert = WebDriverWait(driver, 10).until(EC.alert_is_present())
+        self.assertEqual("Turma cadastrada com sucesso!", alert.text)
+        alert.accept()
+        driver.get("http://127.0.0.1:5500/Códigos/index.html")
 
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'nome'))).send_keys(nome)
-    driver.find_element(By.ID, 'cpf').send_keys(cpf)
-    driver.find_element(By.ID, 'endereco').send_keys(endereco)
-    driver.find_element(By.ID, 'email').send_keys(email)
-    driver.find_element(By.ID, 'contato').send_keys(contato)
-    driver.find_element(By.ID, 'curso').send_keys(curso)
+    def test_lancar_notas(self):
+        driver = self.driver
 
-    driver.find_element(By.CSS_SELECTOR, 'form#cadastroForm button[type=submit]').click()
-    time.sleep(0.1)
-    handle_alert()  # Lidar com o alerta após o cadastro
+        # Lançar notas para a primeira turma
+        driver.find_element(By.LINK_TEXT, "Turma").click()
+        driver.find_element(By.LINK_TEXT, "Lançar Nota").click()
+        driver.find_element(By.ID, "codigo").send_keys("TURMA1")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "atividade").send_keys("Atividade 1")
+        time.sleep(0.01)
+        driver.find_element(By.ID, "codigo").send_keys(Keys.TAB)  # Dispara o evento 'blur' para carregar alunos
 
-# Função para adicionar um professor
-def add_professor(nome, cpf, carteira, endereco, email, contato, titulos, especializacao):
-    driver.get('http://127.0.0.1:5500/cadastrar.html')
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'entidade')))
-    select_entidade = Select(driver.find_element(By.ID, 'entidade'))
-    select_entidade.select_by_visible_text('Professor')
-    time.sleep(0.5)  # Esperar a mudança dos campos
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "alunosContainer"))
+        )
 
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'nome'))).send_keys(nome)
-    driver.find_element(By.ID, 'cpf').send_keys(cpf)
-    driver.find_element(By.ID, 'carteira').send_keys(carteira)
-    driver.find_element(By.ID, 'endereco').send_keys(endereco)
-    driver.find_element(By.ID, 'email').send_keys(email)
-    driver.find_element(By.ID, 'contato').send_keys(contato)
-    driver.find_element(By.ID, 'titulos').send_keys(titulos)
-    driver.find_element(By.ID, 'especializacao').send_keys(especializacao)
+        for i in range(1, 11):
+            driver.find_element(By.NAME, f"nota_1234567890{i:02d}").send_keys(str(int(10 - i * 0.5)))
+            time.sleep(0.01)
 
-    driver.find_element(By.CSS_SELECTOR, 'form#cadastroForm button[type=submit]').click()
-    time.sleep(0.1)
-    handle_alert()  # Lidar com o alerta após o cadastro
+        driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
 
-# Função para adicionar uma turma
-def add_turma(codigo, nomeTurma, alunos, horario, local, professor, status):
-    driver.get('http://127.0.0.1:5500/cadastrar.html')
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'entidade')))
-    select_entidade = Select(driver.find_element(By.ID, 'entidade'))
-    select_entidade.select_by_visible_text('Turma')
-    time.sleep(0.5)  # Esperar a mudança dos campos
+        alert = WebDriverWait(driver, 10).until(EC.alert_is_present())
+        self.assertEqual("Notas lançadas com sucesso!", alert.text)
+        alert.accept()
 
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'codigo'))).send_keys(codigo)
-    driver.find_element(By.ID, 'nomeTurma').send_keys(nomeTurma)
-    for aluno in alunos:
-        select_element = driver.find_element(By.ID, 'alunos')
-        all_options = select_element.find_elements(By.TAG_NAME, "option")
-        for option in all_options:
-            if option.text == aluno:
-                option.click()
-                break
-    driver.find_element(By.ID, 'horario').send_keys(horario)
-    driver.find_element(By.ID, 'local').send_keys(local)
-    select_element = driver.find_element(By.ID, 'professor')
-    all_options = select_element.find_elements(By.TAG_NAME, "option")
-    for option in all_options:
-        if option.text == professor:
-            option.click()
-            break
-    driver.find_element(By.ID, 'status').send_keys(status)
+        # Verificar se o formulário foi limpo
+        self.assertEqual(driver.find_element(By.ID, "codigo").get_attribute("value"), "")
 
-    driver.find_element(By.CSS_SELECTOR, 'form#cadastroForm button[type=submit]').click()
-    time.sleep(0.1)
-    handle_alert()  # Lidar com o alerta após o cadastro
+        # Lançar notas para a segunda turma
+        driver.find_element(By.LINK_TEXT, "Turma").click()
+        driver.find_element(By.LINK_TEXT, "Lançar Nota").click()
+        driver.find_element(By.ID, "codigo").send_keys("TURMA2")
+        time.sleep(0.1)
+        driver.find_element(By.ID, "codigo").send_keys(Keys.TAB)  # Dispara o evento 'blur' para carregar alunos
+        time.sleep(0.1)
+        driver.find_element(By.ID, "atividade").send_keys("Atividade 2")
+        time.sleep(0.01)
 
-# Gerar 50 alunos
-for i in range(1, 51):
-    nome = f"Aluno {i}"
-    cpf = f"{i:03d}.{i:03d}.{i:03d}-{i:02d}"
-    endereco = f"Endereço {i}"
-    email = f"aluno{i}@example.com"
-    contato = f"{i:04d}-{i:04d}"
-    curso = f"Curso {i}"
-    add_aluno(nome, cpf, endereco, email, contato, curso)
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "alunosContainer"))
+        )
 
-# Gerar 10 professores
-for i in range(1, 11):
-    nome = f"Professor {i}"
-    cpf = f"{400 + i:03d}.{400 + i:03d}.{400 + i:03d}-{i:02d}"
-    carteira = f"CT{i}"
-    endereco = f"Endereço {400 + i}"
-    email = f"professor{i}@example.com"
-    contato = f"{4000 + i:04d}-{4000 + i:04d}"
-    titulos = f"Título {i}"
-    especializacao = f"Especialização {i}"
-    add_professor(nome, cpf, carteira, endereco, email, contato, titulos, especializacao)
-    time.sleep(0.1)
+        for i in range(11, 21):
+            driver.find_element(By.NAME, f"nota_1234567890{i:02d}").send_keys(str(int(10 - (i - 10) * 0.5)))
+            time.sleep(0.01)
 
-# Adicionar 5 turmas
-for i in range(1, 6):
-    codigo = f"T{i:03d}"
-    nomeTurma = f"Turma {i}"
-    alunos = [f"Aluno {j}" for j in range(1, 11)]
-    horario = f"Horário {i}"
-    local = f"Local {i}"
-    professor = f"Professor {i}"
-    status = "ativo"
-    add_turma(codigo, nomeTurma, alunos, horario, local, professor, status)
-    time.sleep(0.1)
+        driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
 
-time.sleep(1000)
-driver.quit()
+        alert = WebDriverWait(driver, 10).until(EC.alert_is_present())
+        self.assertEqual("Notas lançadas com sucesso!", alert.text)
+        alert.accept()
+
+        # Verificar se o formulário foi limpo
+        self.assertEqual(driver.find_element(By.ID, "codigo").get_attribute("value"), "")
+        self.assertEqual(driver.find_element(By.ID, "atividade").get_attribute("value"), "")
+        self.assertEqual(driver.find_element(By.ID, "alunosContainer").text, "")
+
+    @classmethod
+    def tearDownClass(cls):
+        # Delay de 300 segundos antes de fechar a janela do navegador
+        time.sleep(300)
+        cls.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()
